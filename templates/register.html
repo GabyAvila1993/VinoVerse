@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style/css/register.css">
+    <title>Registrarse</title>
+</head>
+<body>
+    <div class="background-image"></div>
+    <form class="form" action="/register" method="POST">
+        <h2 class="title">Registrarse</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flash-messages">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+    
+        <div class="flex-column">
+            <label for="nombre">Nombre</label>
+            <div class="inputForm">
+                <input placeholder="Ingrese su nombre" class="input" type="text" id="nombre" name="nombre" required/>
+            </div>
+        </div>
+
+        <div class="flex-column">
+            <label for="apellido">Apellido</label>
+            <div class="inputForm">
+                <input placeholder="Ingrese su apellido" class="input" type="text" id="apellido" name="apellido" required/>
+            </div>
+        </div>
+
+        <div class="flex-column">
+            <label for="email">Correo</label>
+            <div class="inputForm">
+                <input placeholder="Ingrese su correo" class="input" type="email" id="email" name="email" required/>
+            </div>
+        </div>
+
+        <div class="flex-column">
+            <label for="contraseña">Contraseña</label>
+            <div class="inputForm">
+                <input placeholder="Ingrese su contraseña" class="input" type="password" id="contraseña" name="contraseña" required/>
+            </div>
+        </div>
+
+        <div class="flex-column">
+            <label for="confirm_password">Repetir Contraseña</label>
+            <div class="inputForm">
+                <input placeholder="Vuelva a escribir la contraseña" class="input" type="password" id="confirm_password" name="confirm_password" required />
+</div>
+
+        
+        <button class="button-submit">Registrarse</button>
+        
+        <p class="p">¿Ya tienes una cuenta? <a href="/login" class="span">Iniciar sesión</a></p>
+    </form>
+</body>
+</html>

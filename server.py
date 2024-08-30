@@ -54,6 +54,39 @@ def login():
     
     return render_template('login.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        email = request.form['email']
+        contraseña = request.form['contraseña']
+        confirm_password = request.form['confirm_password']
+        
+        if contraseña != confirm_password:
+            flash('Las contraseñas no coinciden', 'error')
+            return redirect(url_for('register'))
+        
+        with mysql.connection.cursor() as cur:
+            # Verificar si el correo ya está registrado
+            cur.execute("SELECT email FROM usuarios WHERE email = %s", (email,))
+            existing_user = cur.fetchone()
+            
+            if existing_user:
+                flash('El correo ya está registrado', 'error')
+                return redirect(url_for('register'))
+            
+            # Guardar el usuario en la base de datos sin hash
+            cur.execute("INSERT INTO usuarios (nombre, apellido, email, contraseña, fecha_registro) VALUES (%s, %s, %s, %s, NOW())",
+                        (nombre, apellido, email, contraseña))
+            mysql.connection.commit()
+        
+        flash('Registro exitoso, ahora puedes iniciar sesión', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('register.html')
+
+
 @app.route('/logout')
 @login_required
 def logout():
