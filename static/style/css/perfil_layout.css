@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body{
+    display: flex;
+    height: 100vh;
+} */
+
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+}
+
+.izquierdo, .derecho {
+    width: 20%; 
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.izquierdo {
+    left: 0;
+}
+
+.derecho {
+    right: 0;
+}
+
+.central {
+    width: 60%; 
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.caja-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* h2{
+    text-shadow: 2px 2px 5px black
+    
+} */
+.relleno, .relleno-2, .publicacion {
+    box-shadow: 7px 5px rgba(128, 128, 128, 0.616), 3px 3px rgba(128, 128, 128, 0.616) inset;
+    /* border: 2px solid black; */
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    
+}
+
+.publicacion img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.publicacion p {
+    margin: 10px 0;
+}
+
+.opciones {
+    position: relative;
+    display: inline-block;
+}
+
+.engranaje-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.opciones-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    padding: 10px;
+}
+
+.opciones-menu a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+}
+
+.opciones-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+.opciones:hover .opciones-menu {
+    display: block;
+}

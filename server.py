@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
-import os
+import os, MySQLdb.cursors
+
+
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -94,9 +96,79 @@ def logout():
     flash('Has cerrado sesión.', 'info')
     return redirect(url_for('login'))
 
-@app.route("/")
+@app.route("/inicio")
 def index():
     return render_template("inicio.html")
 
+@app.route("/")
+def presetntacion():
+    return render_template("principal.html")
+
+
+
+#-------------------------------------------------------------------------------------------------------------------------
+#                                           Obtencion de datos de perfil
+#-------------------------------------------------------------------------------------------------------------------------
+
+@app.route('/perfil/<int:usuario_id>')
+def perfil(usuario_id):
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    # Verificamos perfil del usuario
+    cur.execute('SELECT * FROM perfiles WHERE usuario_id = %s', [usuario_id])
+    perfil = cur.fetchone()
+    
+    if not perfil:
+        flash('Perfil no encontrado')
+        return redirect(url_for('register'))
+    
+    # Verificamos que el usuario este registrado
+    cur.execute('SELECT * FROM usuarios WHERE id = %s', [usuario_id])
+    usuario = cur.fetchone()
+    
+    if not usuario:
+        flash('Usuario no encontrado')
+        return redirect(url_for('register'))
+
+    # Colocamos el nombre y el apellido con la primer letra en mayuscula
+    usuario['nombre'] = usuario['nombre'].capitalize()
+    usuario['apellido'] = usuario['apellido'].capitalize()
+
+    # Buscamos las publicaciones del usuario
+    cur.execute('SELECT * FROM publicaciones WHERE usuario_id = %s', [usuario_id])
+    publicaciones = cur.fetchall()  # Obtener todas las publicaciones
+
+    # Si no hay publicaciones, pasar una lista vacía al template
+    if not publicaciones:
+        publicaciones = []
+        flash('No hay publicaciones recientes', 'info')
+
+    # Pasar los datos del usuario y las publicaciones al template
+    return render_template('perfil_layout.html', usuario=usuario, perfil=perfil, publicaciones=publicaciones)
+
+
+#--------------------------------------------------------------------------------------------------------------------
+#                                      Agregar publicacion a la tabla publicaciones
+#--------------------------------------------------------------------------------------------------------------------
+
+
+
+#--------------------------------------------------------------------------------------------------------------------
+#                                      Agregar publicacion a la tabla publicaciones
+#--------------------------------------------------------------------------------------------------------------------
+
+
+
+#--------------------------------------------------------------------------------------------------------------------
+#                                      Agregar publicacion a la tabla publicaciones
+#--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+#--------------------------------
+#     DEJAR ESTO AL FINAL
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

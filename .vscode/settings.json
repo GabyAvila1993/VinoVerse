@@ -1,0 +1,8 @@
+{
+    "workbench.editor.doubleClickTabToToggleEditorGroupSizes": "expand",
+    "workbench.editor.enablePreviewFromCodeNavigation": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.highlightModifiedTabs": false,
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.restoreViewState": false
+}
