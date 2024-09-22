@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style/css/editar_publicacion.css">
+    <title>Editar Publicación</title>
+</head>
+<body>
+    
+    
+    <form class="editar_publicacion" action="/editar/{{ publicacion.id }}" method="POST">
+        <label  for="titulo">Título:</label>
+        <input  type="text" id="titulo" name="titulo" value="{{ publicacion.titulo }}" required>
+        
+        <label  for="contenido">Contenido:</label>
+        <textarea class="segundo" id="contenido" name="contenido" required>{{ publicacion.contenido }}</textarea>
+        
+        <a href="{{ url_for('perfil', usuario_id=1) }}">Volver al perfil</a>
+        <button type="submit">Guardar cambios</button>
+    </form>
+    
+    
+</body>
+</html>

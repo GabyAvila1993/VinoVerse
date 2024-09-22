@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    
+}
+.editar_publicacion{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 7px 5px rgba(128, 128, 128, 0.616), 3px 3px rgba(128, 128, 128, 0.616) inset;
+    border-radius: 15px;
+    gap: 20px;
+    
+}
+
+
+.editar_publicacion input{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 2px ridge rgba(128, 128, 128, 0.616);
+    border-radius: 15px;
+}
+
+
+.editar_publicacion input:focus {
+    border: 2px solid #9b3a3a; 
+    outline: none;
+}
+
+.editar_publicacion button {
+    padding: 10px; 
+    background-image: linear-gradient(to right, #9b3a3a, #ce6565, #9b3a3a);
+    border-radius: 30px;
+    color: white; 
+    border: none; 
+    cursor: pointer;
+    align-self: self-end;
+}
+
+.segundo{
+    height: 150px;
+}

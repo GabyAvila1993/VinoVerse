@@ -24,13 +24,33 @@
         </aside>
 
         <div class="contenedores central">
+            <div class="nueva_publicacion">
+                <form action="/add" method="POST">
+                    <input type="text" name="titulo_agregado" placeholder="Define un titulo">
+                    <input class= "segundo" type="text" name="Contenido_agregado"  placeholder="Agrega un comentario">
+                    <button type="submit">Publicar</button>
+                </form>
+            </div>
+
+
+
             {% if publicaciones %}
                 {% for publicacion in publicaciones %}
                 <section class="publicacion">
-                    <h1>{{ publicacion.titulo }}</h1>
+                    <div class="cabecera">
+                    <h1 class="indice">{{ publicacion.titulo }}</h1>
+                    <p class="fecha">Publicacion realizada {{ publicacion.fecha_publicacion }}</p>
+                    </div>
+                    <div class="contenidos">
+
+                    </div>
                     <p>{{ publicacion.contenido }}</p>
-                    <img src="{{ publicacion.imagen }}" alt="Imagen de {{ publicacion.titulo }}">
-                    <p>Publicado el {{ publicacion.fecha_publicacion }}</p>
+                    <!-- <img src="{{ publicacion.imagen }}" alt="Imagen de {{ publicacion.titulo }}"> -->
+                    <div class="acciones">
+                        <a href="/editar/{{ publicacion.id }}" class="boton-editar">Editar</a>
+        <a href="/eliminar/{{ publicacion.id }}" class="boton-eliminar" onclick="return confirm('¿Estás seguro de eliminar esta publicación?');">Eliminar</a>
+                    </div>
+
                 </section>
                 {% endfor %}
             {% else %}
