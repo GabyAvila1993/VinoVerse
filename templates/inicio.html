@@ -1,70 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style/css/index.css">
-    <title>Inicio</title>
+    <link rel="stylesheet" href="/static/style/css/inicio.css">
+    <title>Inicio - Publicaciones</title>
 </head>
 <body>
-    
-    <div class="contenedor"><!-- Display flex -->
-        <!-- Columna izquierda fija -->
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">VinoVerse</div>
+        <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/reseñas">Reseñas</a></li>
+            <li><a href="/experiencias">Experiencias</a></li>
+            <li><a href="/eventos">Eventos</a></li>
+            <li><a href="/paquetes">Paquetes</a></li>
+        </ul>
+        <input type="text" class="search-bar" placeholder="Buscar">
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="contenedor">
+        <!-- Sidebar izquierdo -->
         <aside class="contenedores izquierdo">
-            <div class="caja-principal"><!-- Display flex -->
-                <a href=""></a>
-                <div class="relleno">Relleno 1
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae deleniti expedita natus excepturi numquam iure reprehenderit harum dicta quos, provident </p>
-                </div>
-                <div class="relleno">Relleno 2
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius iste, aut natus omnis officiis facilis iusto voluptatem. Obcaecati asperiores, n</p>
-                </div>
-                <div class="relleno">Relleno 3
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto tenetur, vero ad facere, aliquam nihil quos dolores quisquam, tempora accusantium numquam perspiciatis!!</p>
-                </div>
-            </div>
+            <ul>
+                <li><a href="#">Amigos</a></li>
+                <li><a href="#">Guardado</a></li>
+                <li><a href="#">Grupos</a></li>
+                <li><a href="#">Eventos</a></li>
+                <li><a href="#">Hospedaje</a></li>
+                <li><a href="#">Transporte</a></li>
+                <li><a href="#">Mas opciones</a></li>
+            </ul>
         </aside>
 
-        <!-- Contenido central -->
+        <!-- Sección central -->
         <div class="contenedores central">
-            <!-- Publicación 1 -->
-            <section class="publicacion">
-                <h1>Parte Central</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maxime id laboriosam, praesentium soluta voluptate in illo quam rerum consequatur dolore similique porro rem? Provident molestiae aliquid soluta iste corporis.</p>
-                <img src="../static/image/logo.jpg" alt="Probando Foto">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maxime id laboriosam, praesentium soluta voluptate in illo quam rerum consequatur dolore similique porro rem? Provident molestiae aliquid soluta iste corporis.</p>
-            </section>
-
-            <!-- Publicación 2 -->
-            <section class="publicacion">
-                <h1>Parte Central</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maxime id laboriosam, praesentium soluta voluptate in illo quam rerum consequatur dolore similique porro rem? Provident molestiae aliquid soluta iste corporis.</p>
-                <img src="../static/image/logo.jpg" alt="Probando Foto">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maxime id laboriosam, praesentium soluta voluptate in illo quam rerum consequatur dolore similique porro rem? Provident molestiae aliquid soluta iste corporis.</p>
-            </section>
-
-            <!-- Publicación 3 -->
-            <section class="publicacion">
-                <h1>Parte Central</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maxime id laboriosam, praesentium soluta voluptate in illo quam rerum consequatur dolore similique porro rem? Provident molestiae aliquid soluta iste corporis.</p>
-                <img src="../static/image/logo.jpg" alt="Probando Foto">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maxime id laboriosam, praesentium soluta voluptate in illo quam rerum consequatur dolore similique porro rem? Provident molestiae aliquid soluta iste corporis.</p>
-            </section>
+            <!-- Lista de publicaciones -->
+            {% if publicaciones %}
+                {% for publicacion in publicaciones %}
+                <section class="publicacion">
+                    <div class="cabecera">
+                        <h1 class="indice">{{ publicacion.titulo }}</h1>
+                        <p class="fecha">Publicación realizada {{ publicacion.fecha_publicacion }}</p>
+                    </div>
+                    <div class="contenidos">
+                        <img src="{{ publicacion.imagen }}" alt="Imagen de {{ publicacion.titulo }}" class="imagen-publicacion">
+                    </div>
+                    <p>{{ publicacion.contenido }}</p>
+                </section>
+                {% endfor %}
+            {% else %}
+                <section class="publicacion">
+                    <h1>No hay publicaciones recientes</h1>
+                    <p>Aún no tienes publicaciones de amigos.</p>
+                </section>
+            {% endif %}
         </div>
-        
 
-        <!-- Columna derecha fija -->
+        <!-- Sidebar derecho -->
         <aside class="contenedores derecho">
-            <div class="caja-principal">
-                <div class="relleno">Relleno A
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore delectus nobis aut laudantium quis, eveniet suscipit iste eos error a</p>
-                </div>
-                <div class="relleno">Relleno B
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ipsa eligendi illo minima? Perferendis, quidem totam minus odit asperiores beatae labore,</p>
-                </div>
-                <div class="relleno">Relleno C
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iste, nobis consequatur aspernatur accusantium consequuntur itaque, aut recusandae deserunt voluptates, praesen</p>
-                </div>
+            <div class="relleno-derecho">
+                <a href="#">Link1</a>
+                <a href="#">Link2</a>
+                <a href="#">Link3</a>
+                <a href="#">Link4</a>
             </div>
         </aside>
     </div>

@@ -9,6 +9,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
+        
         <div class="logo">VinoVerse</div>
         <ul class="nav-links">
             <li><a href="/">Inicio</a></li>
@@ -38,6 +39,15 @@
 
         <!-- Sección central -->
         <div class="contenedores central">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        <ul class="flash-messages">
+                            {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
             <div class="nueva_publicacion">
                 <form action="/add" method="POST">
                     <input type="text" name="titulo_agregado" placeholder="Define un título">

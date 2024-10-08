@@ -50,11 +50,12 @@ def login():
         if user and user[2] == contraseña:  # Verifica que la contraseña sea correcta
             user_obj = User(user[0], user[1], user[2])
             login_user(user_obj)
-            return redirect(url_for('index'))  # Redirige a la página de inicio
+            return redirect(url_for('perfil', usuario_id=user_obj.id))  # Corregido
         else:
             flash('Credenciales inválidas', 'error')
     
     return render_template('login.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -96,9 +97,21 @@ def logout():
     flash('Has cerrado sesión.', 'info')
     return redirect(url_for('login'))
 
-@app.route("/inicio")
-def index():
-    return render_template("inicio.html")
+@app.route('/inicio')
+@login_required  # Asegúrate de que el usuario esté autenticado para acceder a esta página
+def inicio():
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # Obtenemos las publicaciones de todos los usuarios
+    cur.execute('SELECT * FROM publicaciones ORDER BY fecha_publicacion DESC')
+    publicaciones = cur.fetchall()
+
+    if not publicaciones:
+        publicaciones = []
+
+    # Pasar las publicaciones al template de inicio
+    return render_template('inicio.html', publicaciones=publicaciones)
+
 
 @app.route("/")
 def presetntacion():
@@ -120,7 +133,7 @@ def perfil(usuario_id):
     
     if not perfil:
         flash('Perfil no encontrado')
-        return redirect(url_for('register'))
+        """ return redirect(url_for('register')) """
     
     # Verificamos que el usuario este registrado
     cur.execute('SELECT * FROM usuarios WHERE id = %s', [usuario_id])
@@ -141,7 +154,6 @@ def perfil(usuario_id):
     # Si no hay publicaciones, pasar una lista vacía al template
     if not publicaciones:
         publicaciones = []
-        flash('No hay publicaciones recientes', 'info')
 
     # Pasar los datos del usuario y las publicaciones al template
     return render_template('perfil_layout.html', usuario=usuario, perfil=perfil, publicaciones=publicaciones)
