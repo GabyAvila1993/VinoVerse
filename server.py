@@ -10,7 +10,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'vinoverse'
-app.secret_key = 'supersecretkey'  # Asegúrate de usar una clave secreta segura en producción
+app.secret_key = 'supersecretkey'  
 
 mysql = MySQL(app)
 
