@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style/css/perfil_layout.css">
+    <title>Perfil de {{ usuario.nombre }} {{ usuario.apellido }}</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">VinoVerse</div>
+        <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/reseñas">Reseñas</a></li>
+            <li><a href="/experiencias">Experiencias</a></li>
+            <li><a href="/eventos">Eventos</a></li>
+            <li><a href="/paquetes">Paquetes</a></li>
+        </ul>
+        <input type="text" class="search-bar" placeholder="Buscar">
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="contenedor">
+        <!-- Sidebar izquierdo -->
+        <aside class="contenedores izquierdo">
+            <div class="caja-principal">
+                <div class="relleno">
+                    <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+                    <p><strong>Email:</strong> {{ usuario.email }}</p>
+                    <p><strong>Fecha de Registro:</strong> {{ usuario.fecha_registro }}</p>
+                </div>
+                <div class="relleno 2">
+                    <p><strong>Biografía:</strong> {{ perfil.biografia }}</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Sección central -->
+        <div class="contenedores central">
+            <div class="nueva_publicacion">
+                <form action="/add" method="POST">
+                    <input type="text" name="titulo_agregado" placeholder="Define un título">
+                    <input class="segundo" type="text" name="Contenido_agregado" placeholder="Agrega un comentario">
+                    <button type="submit">Publicar</button>
+                </form>
+            </div>
+
+            <!-- Lista de publicaciones -->
+            {% if publicaciones %}
+                {% for publicacion in publicaciones %}
+                <section class="publicacion">
+                    <div class="cabecera">
+                        <h1 class="indice">{{ publicacion.titulo }}</h1>
+                        <p class="fecha">Publicación realizada {{ publicacion.fecha_publicacion }}</p>
+                    </div>
+                    <div class="contenidos">
+                        <!-- Si deseas mostrar imágenes o texto adicional -->
+                    </div>
+                    <p>{{ publicacion.contenido }}</p>
+                    <!-- <img src="{{ publicacion.imagen }}" alt="Imagen de {{ publicacion.titulo }}"> -->
+                    <div class="acciones">
+                        <a href="/editar/{{ publicacion.id }}" class="boton-editar">Editar</a>
+                        <a href="/eliminar/{{ publicacion.id }}" class="boton-eliminar" onclick="return confirm('¿Estás seguro de eliminar esta publicación?');">Eliminar</a>
+                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                <section class="publicacion">
+                    <h1>No hay publicaciones recientes</h1>
+                    <p>Aún no has realizado ninguna publicación.</p>
+                </section>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar derecho -->
+        <aside class="contenedores derecho">
+            <div class="caja-principal">
+                <div class="relleno">
+                    <h2>Relleno A</h2>
+                    <p>Contenido adicional o sugerencias.</p>
+                </div>
+                <div class="relleno">
+                    <h2>Relleno B</h2>
+                    <p>Contenido adicional o sugerencias.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
