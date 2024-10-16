@@ -105,6 +105,12 @@ def presetntacion():
     return render_template("principal.html")
 
 
+@app.route('/eventos')
+def eventos():
+    return render_template("eventos.html")
+
+
+
 
 #-------------------------------------------------------------------------------------------------------------------------
 #                                           Obtencion de datos de perfil
@@ -120,7 +126,7 @@ def perfil(usuario_id):
     
     if not perfil:
         flash('Perfil no encontrado')
-        return redirect(url_for('register'))
+    """     return redirect(url_for('register')) """
     
     # Verificamos que el usuario este registrado
     cur.execute('SELECT * FROM usuarios WHERE id = %s', [usuario_id])
