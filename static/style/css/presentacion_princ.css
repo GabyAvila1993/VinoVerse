@@ -1,36 +1,154 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     display: flex;
+    margin: 20px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 100vh;
-    background-image: linear-gradient(to right, #773a4c, #8A4D66,#976f7bd3); 
-    
+    /* background-image: linear-gradient(to right, #773a4c, #8A4D66, #976f7bd3); */
+    /* background-color: #c07474c5; */
+    background-color: rgba(201, 182, 182, 0.918);
+
+}
+
+.header-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.header-buttons .boton {
+    font-size: 16px;
+    background-color: #773a4c;
+    color: #fff;
+    border: 2px solid #773a4c;
+    padding: 10px 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.header-buttons .boton:hover {
+    background-color: #773a4c;
+    cursor: pointer;
 }
 
 
-.mundo{
+
+
+.mundo {
     width: 400px;
     height: 400px;
     border-radius: 50%;
-    background:url(/static/image/img.png);
+    background: url(/static/image/img.png);
     background-size: cover;
     box-shadow: inset 3px 2px 1px -1px #000,
-                inset 30px 2px 03px rgb(3, 32, 56,0.7);
+        inset 30px 2px 03px rgb(3, 32, 56, 0.7);
     animation: mundo 7s linear infinite;
 }
 
-@keyframes mundo{
-    0%{
-        background-position-x: 800px ;
+
+
+@keyframes mundo {
+    0% {
+        background-position-x: 800px;
     }
 
-    100%{
-        background-position-x: 0 ;
+    100% {
+        background-position-x: 0;
     }
+}
+
+/* From Uiverse.io by nazeer004 */
+.loader {
+    position:sticky ;
+}
+
+.loader span {
+    position: absolute;
+    color: #773a4c;
+    transform: translate(-50%, -50%);
+    font-size: 150px;
+    letter-spacing: 25px;
+}
+
+.loader span:nth-child(1) {
+    color: transparent;
+    -webkit-text-stroke: 0.6px #773a4c;
+}
+
+.loader span:nth-child(2) {
+    color: #773a4c;
+    -webkit-text-stroke: 1px #773a4c;
+    animation: uiverse723 3s ease-in-out infinite;
+}
+
+@keyframes uiverse723 {
+
+    0%,
+    100% {
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%,
+                54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+
+    60% {
+        clip-path: polygon(0% 60%, 16% 65%, 34% 66%,
+                51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+    }
+}
+
+.button {
+    position:absolute;
+    width: 40%;
+    bottom: 50px;
+    left: 500px;
+    padding: 10px 20px;
+    margin: 10px;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.button span {
+    display: block;
+}
+
+.button {
+    --border-right: 6px;
+    --text-stroke-color: rgba(255, 255, 255, 0.6);
+    --animation-color: #773a4c;
+    --fs-size: 1.5em;
+    /* --fs-size:20px; */
+    letter-spacing: 3px;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: "Arial";
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+
+.hover-text {
+    position: absolute;
+    box-sizing: border-box;
+    content: attr(data-text);
+    color: var(--animation-color);
+    width: 0%;
+    inset: 0;
+    border-right: var(--border-right) solid var(--animation-color);
+    overflow:hidden;
+    transition: 0.5s;
+    -webkit-text-stroke: 1px var(--animation-color);
+}
+
+.button:hover .hover-text {
+    width: 100%;
+    filter: drop-shadow(0 0 23px var(--animation-color));
 }

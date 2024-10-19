@@ -8,17 +8,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">VinoVerse</div>
-        <ul class="nav-links">
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/reseñas">Reseñas</a></li>
-            <li><a href="/experiencias">Experiencias</a></li>
-            <li><a href="/eventos">Eventos</a></li>
-            <li><a href="/paquetes">Paquetes</a></li>
-        </ul>
-        <input type="text" class="search-bar" placeholder="Buscar">
-    </nav>
+    {% include 'layout_navbar.html' %}
 
     <!-- Contenido principal -->
     <div class="contenedor">
@@ -55,7 +45,7 @@
                         <p class="fecha">Publicación realizada {{ publicacion.fecha_publicacion }}</p>
                     </div>
                     <div class="contenidos">
-                        <!-- Si deseas mostrar imágenes o texto adicional -->
+                       
                     </div>
                     <p>{{ publicacion.contenido }}</p>
                     <!-- <img src="{{ publicacion.imagen }}" alt="Imagen de {{ publicacion.titulo }}"> -->

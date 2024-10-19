@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
+from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages,session
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
 import os, MySQLdb.cursors
@@ -10,7 +10,7 @@ app = Flask(__name__, static_url_path='/static')
 # Configuración de Flask y MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = 'Gaby1993*'
 app.config['MYSQL_DB'] = 'vinoverse'
 app.secret_key = 'supersecretkey'  # Asegúrate de usar una clave secreta segura en producción
 
@@ -105,6 +105,44 @@ def presetntacion():
     return render_template("principal.html")
 
 
+#-------------------------------------------------------------------------------------------------------------------------
+#                                           Navbar para probar enlaces
+#-------------------------------------------------------------------------------------------------------------------------
+
+# Ruta Inicio
+
+""" @app.route('/inicio')
+
+def inicio():
+    return render_template('inicio.html') """
+
+# Ruta Reseñas
+
+@app.route('/resenia')
+
+def resenia():
+    return render_template('reseñas.html')
+
+# Ruta Experiencias
+
+@app.route('/experiencias')
+
+def experiencias():
+    return render_template('experiencias.html')
+
+# Ruta Eventos
+
+@app.route('/eventos')
+
+def eventos():
+    return render_template('eventos.html')
+
+# Ruta Galeria
+
+@app.route('/galeria')
+
+def galeria():
+    return render_template('fotos_videos.html')
 
 #-------------------------------------------------------------------------------------------------------------------------
 #                                           Obtencion de datos de perfil
@@ -117,18 +155,21 @@ def perfil(usuario_id):
     # Verificamos perfil del usuario
     cur.execute('SELECT * FROM perfiles WHERE usuario_id = %s', [usuario_id])
     perfil = cur.fetchone()
+
+    print("Perfil:", perfil)
     
     if not perfil:
         flash('Perfil no encontrado')
-        return redirect(url_for('register'))
+        """ return redirect(url_for('register')) """
     
     # Verificamos que el usuario este registrado
     cur.execute('SELECT * FROM usuarios WHERE id = %s', [usuario_id])
     usuario = cur.fetchone()
+    print("Usuario:", usuario)
     
-    if not usuario:
+    """ if not usuario:
         flash('Usuario no encontrado')
-        return redirect(url_for('register'))
+        return redirect(url_for('register')) """
 
     # Colocamos el nombre y el apellido con la primer letra en mayuscula
     usuario['nombre'] = usuario['nombre'].capitalize()
@@ -137,6 +178,7 @@ def perfil(usuario_id):
     # Buscamos las publicaciones del usuario
     cur.execute('SELECT * FROM publicaciones WHERE usuario_id = %s ORDER BY fecha_publicacion DESC', [usuario_id])
     publicaciones = cur.fetchall()  # Obtener todas las publicaciones
+    print("Publicaciones:", publicaciones)
 
     # Si no hay publicaciones, pasar una lista vacía al template
     if not publicaciones:
@@ -145,6 +187,23 @@ def perfil(usuario_id):
 
     # Pasar los datos del usuario y las publicaciones al template
     return render_template('perfil_layout.html', usuario=usuario, perfil=perfil, publicaciones=publicaciones)
+
+
+#--------------------------------------------------------------------------------------------------------------------
+#                                      Eliminar publicacion a la tabla publicaciones
+#--------------------------------------------------------------------------------------------------------------------
+
+@app.route('/eliminar/<int:publicacion_id>', methods= ['GET'])
+def eliminar_publicacion(publicacion_id):
+    cursor = mysql.connection.cursor()
+
+    cursor.execute('DELETE FROM publicaciones WHERE id = %s', [publicacion_id])
+    mysql.connection.commit()
+
+    cursor.close()
+
+    flash('Publicacion eliminada con exito', 'successs')
+    return redirect(url_for('perfil', usuario_id=1))
 
 
 #--------------------------------------------------------------------------------------------------------------------
@@ -190,7 +249,7 @@ def agregar():
 
     
 #--------------------------------------------------------------------------------------------------------------------
-#                                      Editar publicacion a la tabla publicaciones
+#                                      Editar publicaciones
 #--------------------------------------------------------------------------------------------------------------------
 
 @app.route('/editar/<int:publicacion_id>', methods=['GET', 'POST'])
@@ -221,26 +280,12 @@ def editar_publicacion(publicacion_id):
             return redirect(url_for('perfil', usuario_id=1))  
 
 #--------------------------------------------------------------------------------------------------------------------
-#                                      Eliminar publicacion a la tabla publicaciones
+#                                      Mostrar publicaciones en INICIO
 #--------------------------------------------------------------------------------------------------------------------
 
-@app.route('/eliminar/<int:publicacion_id>', methods= ['GET'])
-def eliminar_publicacion(publicacion_id):
-    cursor = mysql.connection.cursor()
-
-    cursor.execute('DELETE FROM publicaciones WHERE id = %s', [publicacion_id])
-    mysql.connection.commit()
-
-    cursor.close()
-
-    flash('Publicacion eliminada con exito', 'successs')
-    return redirect(url_for('perfil', usuario_id=1))
+0
 
 
-
-
-
-#--------------------------------
 #     DEJAR ESTO AL FINAL
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

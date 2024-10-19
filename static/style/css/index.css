@@ -4,148 +4,122 @@
     box-sizing: border-box;
 }
 
-body {
-    /* background-image: linear-gradient(to right, #501e33 , #e98bb2,#501e33); */
-    /* background-image: linear-gradient(to right, #5B2333 , #88626d,#5B2333); *//* borgoña */
-    /* background-image: linear-gradient(to right, #691b37 , #7e4459,#691b37); */ /* Codigo Martin */
-
-    /* -------Borgoña------------ */
-    /* background-image: linear-gradient(to right, #5B2333, #8A4D66, #5B2333); */
-
-    /* -------Cobre------- */
-    /* background-image: linear-gradient(to right, #A67C52, #C29576, #A67C52); */
-
-    /* -------Beige------- */
-    /* background-image: linear-gradient(to right, #E8D8C3, #F2E7D9, #E8D8C3); */
-
-    /* -----Verde Oliva----- */
-    /* background-image: linear-gradient(to right, #4A503D, #697158, #4A503D); */
-
-    /* -----Gris Pizzarra */
-    /* background-image: linear-gradient(to right, #2F2E2E, #4A4949, #2F2E2E); */
-
-    /* ----Vino Rosado----- */
-    /* background-image: linear-gradient(to right, #D98A8A, #F0B7B7, #D98A8A); */
-
-    /* ----Champang----- */
-    /* background-image: linear-gradient(to right, #F1E0C5, #F7ECD7, #F1E0C5); */
-
-    background-image: linear-gradient(to right, #9b3a3a, #ce6565, #9b3a3a);
-
-
-    /* background-image: linear-gradient(to right,#6c3030,#813333,#9b3a3a,#b94949,#9b3a3a,#813333,#6c3030); */
-
-
-
-
-    color: whitesmoke;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden; /* Elimina el scroll horizontal */
-}
-
+/* Layout general */
 .contenedor {
     display: flex;
     justify-content: space-between;
+    margin-top: 80px;  
 }
 
 .izquierdo, .derecho {
-    width: 20%; 
-    position: fixed;
+    width: 20%;
+    position: relative;  
     top: 0;
     bottom: 0;
     overflow-y: auto;
     padding: 10px;
-    /* background-color: #bb717a;
-    background-color: #e4a9b0d7; */
-}
-
-.izquierdo {
-    left: 0;
-}
-
-.derecho {
-    right: 0;
 }
 
 .central {
-    width: 60%; 
+    width: 60%;
     margin: 0 auto;
     padding: 20px;
-    /* background-color: rgba(255, 255, 255, 0.1); */
     overflow-y: auto;
 }
 
-.caja-principal {
+
+.nueva_publicacion {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 7px 5px rgba(128, 128, 128, 0.616), 3px 3px rgba(128, 128, 128, 0.616) inset;
+    border-radius: 15px;
+    gap: 20px;
 }
 
-.relleno, .publicacion {
-    /* background-color: rgba(255, 255, 255, 0.2); */
-    border: 2px solid white;
+.nueva_publicacion input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px ridge rgba(128, 128, 128, 0.616);
     border-radius: 15px;
-    /* background-color: whitesmoke;
-    color: black; */
+}
+
+.nueva_publicacion input:focus {
+    border: 2px solid #9b3a3a;
+    outline: none;
+}
+
+.nueva_publicacion button {
+    padding: 10px;
+    background-image: linear-gradient(to right, #9b3a3a, #ce6565, #9b3a3a);
+    border-radius: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    align-self: self-end;
+}
+
+.segundo {
+    height: 150px;
+}
+
+/* Publicaciones */
+.publicacion {
+    box-shadow: 7px 5px rgba(128, 128, 128, 0.616), 3px 3px rgba(128, 128, 128, 0.616) inset;
+    border: 2px ridge rgba(128, 128, 128, 0.616);
+    border-radius: 15px;
     padding: 20px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.publicacion img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    margin-top: 10px;
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.publicacion p {
-    margin: 10px 0;
+.cabecera h1 {
+    margin: 0;
+    font-size: 20px;
 }
 
-
-/* media queri para hacerlo responsive */
-
-/* Media Queries para pantallas medianas (tabletas) */
-@media (max-width: 1024px) {
-    .contenedor {
-        flex-direction: row;
-    }
-
-    .izquierdo, .derecho {
-        width: 15%;
-    }
-
-    .central {
-        width: 70%;
-        left: 15%;
-        right: 15%;
-    }
+.cabecera .fecha {
+    font-size: 0.9em;
+    color: gray;
+    margin: 0;
 }
 
-/* Media Queries para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
-    .derecho {
-        display: none; /* Ocultar la columna derecha en pantallas pequeñas */
-    }
+/* Ajuste de las cajas de datos personales y biografía */
+.relleno, .relleno-2 {
+    box-shadow: 7px 5px rgba(128, 128, 128, 0.616), 3px 3px rgba(128, 128, 128, 0.616) inset;
+    border: 2px ridge rgba(128, 128, 128, 0.616);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-    .izquierdo {
-        width: 40px; /* Reducir la columna izquierda para solo mostrar un emoji */
-        padding: 10px 5px;
-        text-align: center;
-    }
+/* Cajas laterales */
+.izquierdo .relleno, .derecho .relleno {
+    box-shadow: 7px 5px rgba(128, 128, 128, 0.616), 3px 3px rgba(128, 128, 128, 0.616) inset;
+    border: 2px ridge rgba(128, 128, 128, 0.616);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-    .izquierdo::before {
-        content: "🍷"; /* Emoji en la columna izquierda */
-        font-size: 1.5rem;
-        display: block;
-        margin-bottom: 10px;
-    }
+.acciones {
+    margin-top: 40px;
+}
 
-    .central {
-        width: calc(100% - 40px); /* Ajustar el ancho central para ocupar el espacio restante */
-        margin-left: 40px;
-        left: auto;
-        right: auto;
-    }
+.boton-editar, .boton-eliminar {
+    margin: 15px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, #9b3a3a, #ce6565, #9b3a3a);
 }

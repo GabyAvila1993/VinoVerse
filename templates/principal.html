@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style/css/presentacion_princ.css">
     <title>Presentacion</title>
 </head>
+
 <body>
-    
+
+    <div class="header-buttons">
+        <a href="{{ url_for('login') }}" class="boton">Login</a>
+        <a href="{{ url_for('register') }}" class="boton">Registro</a>
+    </div>
+
     <div class="mundo"></div>
+
+    <div class="loader">
+        <span>VinoVerse</span>
+        <span>VinoVerse</span>
+    </div>
+
+
+
+    <footer class="button" data-text="Awesome">
+        <span class="actual-text">&nbsp;&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">&nbsp;un mundo por conocer&nbsp;</span>
+    </footer>
 </body>
+
 </html>
+
+
